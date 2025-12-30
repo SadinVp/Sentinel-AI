@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sign Up & Sign In</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='new_login_styles.css') }}"
+    />
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="signup-outer-container">
+      <div class="signup-inner-container">
+        <h1>Sentinel Cart</h1>
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <ul class="flashes">
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
+
+        <!-- Sign Up Form -->
+        <form
+          id="signup-form"
+          method="post"
+          action="{{ url_for('auth_bp.login_register') }}"
+        >
+          <input type="hidden" name="register" value="register" />
+          <h2>Sign Up</h2>
+          <label for="signup-email"
+            >Email <span class="required">*</span></label
+          >
+          <input
+            class="width"
+            type="email"
+            id="signup-email"
+            name="register-email"
+            required
+          />
+          <label for="signup-username"
+            >Username <span class="required">*</span></label
+          >
+          <input
+            class="width"
+            type="text"
+            id="signup-username"
+            name="register-username"
+            required
+          />
+          <label for="signup-password"
+            >Password <span class="required">*</span></label
+          >
+          <input
+            class="width"
+            type="password"
+            id="signup-password"
+            name="register-password"
+            required
+          />
+          <button type="submit" class="btn-signup">Sign Up</button>
+          <div class="signin-link">
+            Already have an account?
+            <a href="#" onclick="toggleForms(true)">Sign In</a>
+          </div>
+        </form>
+
+        <!-- Sign In Form -->
+        <form
+          id="signin-form"
+          class="hidden"
+          method="post"
+          action="{{ url_for('auth_bp.login_register') }}"
+        >
+          <input type="hidden" name="login" value="login" />
+          <h2>Sign In</h2>
+          <label for="signin-email"
+            >Email <span class="required">*</span></label
+          >
+          <input
+            class="width"
+            type="email"
+            id="signin-email"
+            name="login-email"
+            required
+          />
+          <label for="signin-password"
+            >Password <span class="required">*</span></label
+          >
+          <input
+            class="width"
+            type="password"
+            id="signin-password"
+            name="login-password"
+            required
+          />
+          <button type="submit" class="btn-signin">Sign In</button>
+          <div class="signup-link">
+            New here? <a href="#" onclick="toggleForms(false)">Sign Up</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function toggleForms(showSignin) {
+        document
+          .getElementById("signup-form")
+          .classList.toggle("hidden", showSignin);
+        document
+          .getElementById("signin-form")
+          .classList.toggle("hidden", !showSignin);
+      }
+    </script>
+  </body>
+</html>

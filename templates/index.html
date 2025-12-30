@@ -1,0 +1,252 @@
+{% extends "base.html" %} {% block title %}Home - Trusty Cart{% endblock %} {%
+block content %}
+
+<div class="hero-section">
+  <div class="hero-content">
+    <div class="hero-text">
+      <span class="discount">Special Discount +</span>
+      <h1>
+        CHOOSE SENTINEL CART SAVINGS! UPTO
+        <span class="highlight">35% OFF</span>
+      </h1>
+      <p>1.85" AMOLED Display | Premium Metal Build</p>
+      <button class="shop-btn">Shop Now</button>
+    </div>
+    <div class="hero-image">
+      <img id="hero-img" src="static/images/image1.jpg" alt="Product Image" />
+    </div>
+  </div>
+</div>
+
+<div class="categories-section">
+  <h4 class="categories-title">Shop by Categories</h4>
+  <div class="categories-row">
+    <div class="category-item">
+      <a href="headphones.html" class="category-link">
+        <div class="category-icon" style="background: #c7e5e8">
+          <img src="static/images/headphone.png" alt="Headphones" />
+        </div>
+        <span>Headphones</span>
+      </a>
+    </div>
+    <div class="category-item">
+      <a href="earbuds.html" class="category-link">
+        <div class="category-icon" style="background: #ccd9ea">
+          <img src="static/images/earbud.png" alt="Earbuds" />
+        </div>
+        <span>Earbuds</span>
+      </a>
+    </div>
+    <div class="category-item">
+      <a href="powerbanks.html" class="category-link">
+        <div class="category-icon" style="background: #f7e2db">
+          <img src="static/images/powerbank.png" alt="Power Banks" />
+        </div>
+        <span>Power Banks</span>
+      </a>
+    </div>
+    <div class="category-item">
+      <a href="laptops.html" class="category-link">
+        <div class="category-icon" style="background: #dedcf3">
+          <img src="static/images/laptops.png" alt="Laptops" />
+        </div>
+        <span>Laptops</span>
+      </a>
+    </div>
+    <div class="category-item">
+      <a href="fitnessbands.html" class="category-link">
+        <div class="category-icon" style="background: #dbedf6">
+          <img src="static/images/fitnessband.png" alt="Fitness Bands" />
+        </div>
+        <span>Fitness Bands</span>
+      </a>
+    </div>
+    <div class="category-item">
+      <a href="speakers.html" class="category-link">
+        <div class="category-icon" style="background: #cdd5db">
+          <img src="static/images/speaker.png" alt="Speaker" />
+        </div>
+        <span>Speaker</span>
+      </a>
+    </div>
+    <div class="category-item">
+      <a href="chargers.html" class="category-link">
+        <div class="category-icon" style="background: #c8d9e5">
+          <img src="static/images/chargers.png" alt="Charges" />
+        </div>
+        <span>Chargers</span>
+      </a>
+    </div>
+    <div class="category-item">
+      <a href="securitycam.html" class="category-link">
+        <div class="category-icon" style="background: #e8dbdb">
+          <img src="static/images/securitycam.png" alt="Security Cam" />
+        </div>
+        <span>Security Cam</span>
+      </a>
+    </div>
+    <div class="category-item">
+      <a href="printers.html" class="category-link">
+        <div class="category-icon" style="background: #e9e6f0">
+          <img src="static/images/printers.png" alt="Photo printers" />
+        </div>
+        <span>Photo printers</span>
+      </a>
+    </div>
+    <div class="category-item">
+      <a href="cameras.html" class="category-link">
+        <div class="category-icon" style="background: #f5dfda">
+          <img src="static/images/cameras.png" alt="Cameras" />
+        </div>
+        <span>Cameras</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<section class="top-picks">
+  <h2>Top Picks For You</h2>
+  <div class="product-grid mb-4">
+    <!-- Product Card 1 -->
+    <div class="product-card">
+      <div class="badge">Sale</div>
+      <img src="static/images/pic1.jpg" alt="AeroPods X2" />
+      <div class="product-details">
+        <h3>AeroPods X2</h3>
+        <p class="price">Rs.699.00</p>
+        <a href="{{ url_for('xss_bp.product_page', name='AeroPods_X2') }}"><button>View Details</button></a>
+      </div>
+    </div>
+    <!-- Product Card 2 -->
+    <div class="product-card">
+      <div class="badge">Sale</div>
+      <img src="static/images/pic2.jpg" alt="BassWave Pro" />
+      <div class="product-details">
+        <h3>BassWave Pro</h3>
+        <p class="price">Rs.4,999.00</p>
+        <button>View Details</button>
+      </div>
+    </div>
+    <!-- Product Card 3 -->
+    <div class="product-card">
+      <div class="badge">Sale</div>
+      <img src="static/images/pic3.jpg" alt="Casio Men's Watch" />
+      <div class="product-details">
+        <h3>Casio Men's Watch</h3>
+        <p class="price">
+          <span class="discount">Rs.1,000 off</span> Rs.2,000.00
+        </p>
+        <button>View Details</button>
+      </div>
+    </div>
+    <!-- Product Card 4 -->
+    <div class="product-card">
+      <img src="static/images/pic4.jpg" alt="CorePro X" />
+      <div class="product-details">
+        <h3>CorePro X</h3>
+        <p class="price">Rs.100,000.00</p>
+        <button>View Details</button>
+      </div>
+    </div>
+  </div>
+  <!-- Second row-->
+  <div class="product-grid">
+    <div class="product-card">
+      <div class="badge">Sale</div>
+      <img src="static/images/pic5.jpg" alt="AeroPods X2" />
+      <div class="product-details">
+        <h3>Samsung S24 Ultra</h3>
+        <p class="price">Rs.69999.00</p>
+        <button>View Details</button>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="badge">Sale</div>
+      <img src="static/images/pic6.jpg" alt="AeroPods X2" />
+      <div class="product-details">
+        <h3>MagSafe</h3>
+        <p class="price">Rs.1699.00</p>
+        <button>View Details</button>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="badge">Sale</div>
+      <img src="static/images/pic7.jpg" alt="AeroPods X2" />
+      <div class="product-details">
+        <h3>Powerbank</h3>
+        <p class="price">Rs.999.00</p>
+        <button>View Details</button>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="badge">Sale</div>
+      <img src="static/images/pic8.jpg" alt="AeroPods X3 Pro" />
+      <div class="product-details">
+        <h3>AeroPods X2</h3>
+        <p class="price">Rs.1299.00</p>
+        <button>View Details</button>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="spark-footer">
+  <div class="spark-footer-container">
+    <div class="spark-footer-left">
+      <h2> Sentinel AI</h2>
+      <div class="spark-subscribe-label">Subscribe to our Mail alerts</div>
+      <form class="spark-subscribe-form">
+        <input
+          type="email"
+          placeholder="Enter Your Email Address"
+          class="spark-subscribe-input"
+        />
+        <button class="spark-subscribe-btn">Submit</button>
+      </form>
+      <div>
+        <span class="spark-follow-label">Follow us</span>
+        <a href="#"><i class="fab fa-facebook-f spark-social-icon"></i></a>
+        <a href="#"><i class="fab fa-pinterest-p spark-social-icon"></i></a>
+        <a href="#"><i class="fab fa-youtube spark-social-icon"></i></a>
+        <a href="#"><i class="fab fa-instagram spark-social-icon"></i></a>
+      </div>
+    </div>
+    <div class="spark-footer-links-section">
+      <div>
+        <h4 class="spark-footer-head">Our Products</h4>
+        <div>Smart Watches</div>
+        <div>Wireless Earbuds</div>
+        <div>Bluetooth Speakers</div>
+        <div>Spark Gift Card</div>
+      </div>
+      <div>
+        <h4 class="spark-footer-head">For Business</h4>
+        <div>Spark For Business</div>
+        <div>Corporate Enquiries</div>
+        <div>Brand Partners</div>
+      </div>
+      <div>
+        <h4 class="spark-footer-head">About Sentinel AI</h4>
+        <div>About us</div>
+        <div>Blog</div>
+        <div>Careers</div>
+        <div>In the Press</div>
+      </div>
+      <div>
+        <h4 class="spark-footer-head">Legal</h4>
+        <div>Terms and Conditions</div>
+        <div>Privacy Policy</div>
+        <div>Social Responsibilities</div>
+      </div>
+      <div>
+        <h4 class="spark-footer-head">Support</h4>
+        <div>Track your order</div>
+        <div>Shipping and return policy</div>
+        <div>Product Support</div>
+        <div>Register your Warranty</div>
+        <div>Contact us</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% endblock %}

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ product_name }} Reviews</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at 20% 20%, #111 0%, #000 100%);
+      color: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow-x: hidden;
+    }
+
+    .product-card {
+      background: rgba(30, 30, 30, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(0, 123, 255, 0.2);
+      padding: 40px;
+      max-width: 850px;
+      width: 90%;
+      margin-top: 60px;
+      text-align: center;
+      transition: all 0.4s ease;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 0 60px rgba(0, 123, 255, 0.4);
+      transform: scale(1.02);
+    }
+
+    img {
+      width: 240px;
+      filter: drop-shadow(0 0 15px rgba(255,255,255,0.2));
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    h1 {
+      font-size: 32px;
+      margin: 10px 0;
+      background: linear-gradient(90deg, #ffffff, #00aaff, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 4s linear infinite;
+    }
+
+    @keyframes glow {
+      0% { filter: drop-shadow(0 0 10px #00aaff); }
+      50% { filter: drop-shadow(0 0 25px #0077ff); }
+      100% { filter: drop-shadow(0 0 10px #00aaff); }
+    }
+
+    .price {
+      font-size: 24px;
+      color: #00aaff;
+      margin: 10px 0 25px;
+    }
+
+    .desc {
+      font-size: 15px;
+      color: #bbb;
+      margin-bottom: 35px;
+    }
+
+    textarea {
+      width: 90%;
+      border-radius: 10px;
+      border: 1px solid #444;
+      padding: 12px;
+      background-color: #111;
+      color: #fff;
+      font-size: 15px;
+      resize: none;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    textarea:focus {
+      border-color: #00aaff;
+      box-shadow: 0 0 8px #00aaff;
+    }
+
+    input[type="submit"] {
+      background: linear-gradient(90deg, #0071e3, #00aaff);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 25px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background: linear-gradient(90deg, #00aaff, #0071e3);
+      box-shadow: 0 0 15px #0071e3;
+      transform: scale(1.05);
+    }
+
+    #result {
+      margin-top: 10px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    h3 {
+      margin-top: 40px;
+      font-size: 20px;
+      color: #00aaff;
+      text-shadow: 0 0 10px rgba(0,170,255,0.5);
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 10px;
+      width: 100%;
+      text-align: left;
+    }
+
+    li {
+      background: rgba(255,255,255,0.05);
+      border-left: 3px solid #00aaff;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      word-break: break-word;
+      transition: all 0.3s ease;
+    }
+
+    li:hover {
+      background: rgba(0,170,255,0.1);
+      transform: translateX(5px);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="product-card">
+   <img src="{{ url_for('static', filename='images/pic1.jpg') }}" alt="AeroPods X2" />
+    <h1>{{ product_name }}</h1>
+    <p class="price">₹24,900</p>
+    <p class="desc">Premium wireless earbuds with adaptive transparency, spatial audio, and active noise cancellation. Designed for a seamless Apple ecosystem experience.</p>
+
+    <form id="reviewForm">
+      <label for="reviewInput"><strong>Write your review:</strong></label><br>
+      <textarea id="reviewInput" name="reviewInput" rows="4"></textarea><br>
+      <input type="submit" value="Submit Review">
+    </form>
+
+    <p id="result"></p>
+
+    <h3>All Reviews:</h3>
+    <ul id="reviewsList"></ul>
+  </div>
+
+  <script>
+    async function loadReviews() {
+      const res = await fetch('/reviews');
+      const data = await res.json();
+      const ul = document.getElementById('reviewsList');
+      ul.innerHTML = '';
+      data.reviews.forEach((rev) => {
+        const li = document.createElement('li');
+        li.innerHTML = rev; // purposely not escaped to simulate attack
+        ul.appendChild(li);
+      });
+    }
+
+    document.getElementById('reviewForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const reviewText = document.getElementById('reviewInput').value;
+
+      fetch('/detect_xss', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({input: reviewText})
+      })
+      .then(response => response.json())
+      .then(data => {
+        const result = document.getElementById('result');
+        if (data.xss_detected) {
+          result.innerText = '⚠️ XSS Attack detected! Review blocked.';
+          result.style.color = '#ff4d4d';
+        } else {
+          result.innerText = '✅ Review submitted successfully!';
+          result.style.color = '#00ff99';
+          loadReviews();
+        }
+      })
+      .catch(error => {
+        document.getElementById('result').innerText = 'Error: ' + error;
+      });
+    });
+
+    window.onload = loadReviews;
+  </script>
+</body>
+</html>
