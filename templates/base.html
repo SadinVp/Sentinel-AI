@@ -52,11 +52,28 @@
 
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 pe-2">
               {% if user.is_authenticated %}
-              <li class="nav-item d-flex align-items-center">
-                <img src="{{ user.avatar_url }}" alt="Avatar" class="rounded-circle me-2" width="32" height="32" />
-                <span>{{ user.username }}</span>
-                <a class="nav-link ms-3" href="{{ url_for('auth_bp.logout') }}">Sign Out</a>
-              </li>
+                <li class="nav-item dropdown user-dropdown">
+                  <a class="nav-link d-flex align-items-center dropdown-toggle"
+                    href="#"
+                    id="userDropdown"
+                    role="button">
+                    
+                    <img src="{{ user.avatar_url }}"
+                        alt="Avatar"
+                        class="rounded-circle me-2"
+                        width="32"
+                        height="32">
+                    <span>Hi {{ user.username | capitalize }}</span>
+                  </a>
+
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <a class="dropdown-item" href="{{ url_for('auth_bp.logout') }}">
+                        Sign Out
+                      </a>
+                    </li>
+                  </ul>
+                </li>
               {% else %}
               <li class="nav-item">
                 <a class="nav-link active" href="{{ url_for('auth_bp.login_register') }}">Login</a>

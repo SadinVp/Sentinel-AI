@@ -326,3 +326,18 @@ button:hover {
 }
 
 /* add oher CSS styles here */
+/* Hide dropdown by default */
+.user-dropdown .dropdown-menu {
+  display: none;
+  margin-top: 0;
+}
+
+/* Show dropdown on hover */
+.user-dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Remove arrow icon if you want */
+.user-dropdown .dropdown-toggle::after {
+  display: none;
+}
