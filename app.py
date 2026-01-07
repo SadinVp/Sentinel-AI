@@ -101,8 +101,8 @@ def extract_request_data(req):
 # Load GLOBAL WAF model
 # ===============================
 
-global_model = joblib.load("global_model.joblib1")
-global_vectorizer = joblib.load("global_vectorizer.joblib1")
+global_model = joblib.load("models/global_model.joblib1")
+global_vectorizer = joblib.load("models/global_vectorizer.joblib1")
 
 QUARANTINE_THRESHOLD = 0.40   # for retraining dataset
 BLOCK_THRESHOLD = 0.65        # for security enforcement
