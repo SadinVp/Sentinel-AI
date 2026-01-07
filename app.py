@@ -7,7 +7,7 @@ import joblib
 from extensions import db
 from routes.auth import auth_bp
 from routes.main import main_bp
-from routes.xss_demo import xss_bp
+from routes.xssdemo import xss_bp
 from models.user import User
 import os
 import csv
@@ -100,8 +100,7 @@ def extract_request_data(req):
 # ===============================
 # Load GLOBAL WAF model
 # ===============================
-global_model = joblib.load("global_model.joblib")
-global_vectorizer = joblib.load("global_vectorizer.joblib")
+
 global_model = joblib.load("global_model.joblib1")
 global_vectorizer = joblib.load("global_vectorizer.joblib1")
 
