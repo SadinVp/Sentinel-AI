@@ -75,21 +75,9 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "auth_bp.login_register"
 
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-
-@app.route("/test-log")
-def test_log():
-    log_quarantine("test_request", 0.99, "TEST")
-    return "logged"
-
-@app.route("/search")
-def search():
-    return "search page"
-
-
 
 
 # ===============================
