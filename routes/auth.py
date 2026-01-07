@@ -2,6 +2,7 @@ from flask import Blueprint, request, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user
 from models.user import User
 from extensions import db
+from security.bruteforce import register_failed_login
 
 auth_bp = Blueprint('auth_bp', __name__)
 
@@ -16,6 +17,8 @@ def login_register():
                 login_user(user)
                 return redirect(url_for('main_bp.index'))
             else:
+                # register failed attempt for this IP + email
+                register_failed_login(request.remote_addr or "unknown", email)
                 flash('Invalid login credentials')
 
         elif 'register' in request.form:  # Register form
